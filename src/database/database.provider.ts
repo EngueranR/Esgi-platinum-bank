@@ -3,6 +3,7 @@ import { CreditCard } from 'src/credit-card/credit-card.entity';
 import { BankAccount } from 'src/bank-account/bank-account.entity';
 import { Bank } from 'src/bank/bank.entity';
 import { User } from 'src/user/user.entity';
+import { DAB } from 'src/dab/dab.entity';
 
 export const databaseProviders = [
   {
@@ -15,12 +16,13 @@ export const databaseProviders = [
         username: process.env.DATABASE_USERNAME,
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
-        models: [BankAccount, User, CreditCard, Bank],
+        models: [BankAccount, User, CreditCard, Bank, DAB],
       });
 
       BankAccount.hasMany(User);
       BankAccount.hasMany(CreditCard);
       CreditCard.hasOne(User);
+      DAB.hasOne(Bank);
 
       await sequelize.sync({ force: true });
       return sequelize;
