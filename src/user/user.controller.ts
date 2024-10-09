@@ -3,47 +3,50 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
   UseGuards,
 } from '@nestjs/common';
+import { IUser } from './user.interface';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './user.entity';
 import { AuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
-  @Post()
-  @UseGuards(AuthGuard)
-  create(@Body() createUserDto: CreateUserDto) {
-    console.log('Guard is applied');
-    return this.userService.create(createUserDto);
-  }
+  constructor(private UserService: UserService) {}
 
   @Get()
   @UseGuards(AuthGuard)
-  findAll() {
-    console.log('Guard is applied');
-    return this.userService.findAll();
+  async findAll(): Promise<User[]> {
+    return await this.UserService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  async findOne(@Param('id') id: number): Promise<User> {
+    return await this.UserService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  @Post()
+  @UseGuards(AuthGuard)
+  async create(@Body('user') user: IUser): Promise<User> {
+    return await this.UserService.create(user);
+  }
+
+  @Put(':id')
+  @UseGuards(AuthGuard)
+  async update(
+    @Param('id') id: number,
+    @Body('user') user: IUser,
+  ): Promise<User> {
+    return await this.UserService.update(id, user);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @UseGuards(AuthGuard)
+  async remove(@Param('id') id: number): Promise<number> {
+    return await this.UserService.remove(id);
   }
 }
