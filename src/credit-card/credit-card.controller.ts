@@ -30,7 +30,6 @@ export class CreditCardController {
   }
 
   @Post()
-  @UseGuards(AuthGuard)
   async create(@Body() creditCard: ICreditCard): Promise<CreditCard> {
     return await this.creditCardService.create(creditCard);
   }
