@@ -12,6 +12,7 @@ import { IUser } from './user.interface';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { AuthGuard } from 'src/auth/jwt-auth.guard';
+import { BankAccount } from 'src/bank-account/bank-account.entity';
 
 @Controller('user')
 export class UserController {
@@ -44,5 +45,9 @@ export class UserController {
   @UseGuards(AuthGuard)
   async remove(@Param('id') id: number): Promise<number> {
     return await this.UserService.remove(id);
+  }
+  @Get(':id/accounts')
+  async getAllAccounts(@Param('id') userId: number): Promise<BankAccount[]> {
+    return await this.UserService.findAllAccountsbyUser(userId);
   }
 }

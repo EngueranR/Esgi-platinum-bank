@@ -41,4 +41,10 @@ export class BankAccountService {
   async remove(id: number): Promise<number> {
     return this.bankAccountRepository.destroy({ where: { id } });
   }
+
+  async findAccountsByUser(userId: number): Promise<BankAccount[]> {
+    return await this.bankAccountRepository.findAll({
+      where: { userId },
+    });
+  }
 }

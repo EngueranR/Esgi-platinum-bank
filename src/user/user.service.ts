@@ -2,10 +2,15 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { IUser } from './user.interface';
+import { BankAccount } from 'src/bank-account/bank-account.entity';
+import { BankAccountService } from 'src/bank-account/bank-account.service';
 
 @Injectable()
 export class UserService {
-  constructor(@Inject('USER_REPOSITORY') private userRepository: typeof User) {}
+  constructor(
+    @Inject('USER_REPOSITORY') private userRepository: typeof User,
+    private bankAccountService: BankAccountService,
+  ) {}
 
   async findAll(): Promise<User[]> {
     return await this.userRepository.findAll<User>();
@@ -37,5 +42,16 @@ export class UserService {
 
   async remove(id: number): Promise<number> {
     return this.userRepository.destroy({ where: { id } });
+  }
+
+  async findAllAccountsbyUser(userId: number): Promise<BankAccount[]> {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return await this.bankAccountService.findAccountsByUser(userId);
   }
 }
