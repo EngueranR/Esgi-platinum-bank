@@ -30,7 +30,6 @@ export class TransactionController {
   }
 
   @Post()
-  @UseGuards(AuthGuard)
   async create(@Body() transaction: ITransaction): Promise<Transaction> {
     return await this.transactionService.create(transaction);
   }

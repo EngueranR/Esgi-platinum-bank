@@ -30,7 +30,6 @@ export class BankAccountController {
   }
 
   @Post()
-  @UseGuards(AuthGuard)
   async create(@Body() bankAccount: IBankAccount): Promise<BankAccount> {
     return await this.BankAccountService.create(bankAccount);
   }
