@@ -18,14 +18,17 @@ export class CreditCard extends Model {
   id: number;
 
   @Unique
-  @Column(DataType.STRING)
+  @Column(DataType.INTEGER({ length: 16 }))
   cardNumber: string;
 
   @Column(DataType.DATE)
   expiryDate: Date;
 
-  @Column(DataType.STRING)
+  @Column(DataType.STRING(3))
   cvv: string;
+
+  @Column(DataType.INTEGER({ length: 4 }))
+  pin: number;
 
   @ForeignKey(() => BankAccount)
   @Column
