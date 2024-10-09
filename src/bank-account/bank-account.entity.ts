@@ -7,6 +7,7 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript';
+import { BankAccountType } from './bank-account-type.enum';
 
 @Table
 export class BankAccount extends Model {
@@ -24,4 +25,7 @@ export class BankAccount extends Model {
 
   @Column(DataType.DATE)
   openedDate: Date;
+
+  @Column
+  type: BankAccountType;
 }
