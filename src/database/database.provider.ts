@@ -20,11 +20,11 @@ export const databaseProviders = [
         models: [BankAccount, User, CreditCard, Bank, DAB, Transaction],
       });
 
-      BankAccount.hasMany(User);
+      User.hasMany(BankAccount);
+      BankAccount.belongsTo(User);
       BankAccount.hasMany(CreditCard);
-      CreditCard.hasOne(User);
+      CreditCard.belongsTo(BankAccount);
       DAB.hasOne(Bank);
-
       await sequelize.sync({ force: true });
       return sequelize;
     },
