@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ICreditCard } from './credit-card.interface';
 import { CreditCard } from './credit-card.entity';
-import { CreditCardService } from './user.service';
+import { CreditCardService } from './credit-card.service';
 
 @Controller('credit-card')
 export class CreditCardController {
