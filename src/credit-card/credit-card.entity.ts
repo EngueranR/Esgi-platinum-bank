@@ -18,7 +18,7 @@ export class CreditCard extends Model {
   id: number;
 
   @Unique
-  @Column(DataType.INTEGER({ length: 16 }))
+  @Column(DataType.STRING(16))
   cardNumber: string;
 
   @Column(DataType.DATE)
