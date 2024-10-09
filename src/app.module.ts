@@ -9,6 +9,7 @@ import { BankAccountModule } from './bank-account/bank-account.module';
 import { BankModule } from './bank/bank.module';
 import { CreditCardModule } from './credit-card/credit-card.module';
 import { DABModule } from './dab/dab.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { DABModule } from './dab/dab.module';
     BankModule,
     CreditCardModule,
     DABModule,
+    TransactionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
