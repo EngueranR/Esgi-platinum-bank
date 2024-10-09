@@ -1,4 +1,4 @@
-import { CreditCardService } from './../credit-card/user.service';
+import { CreditCardService } from '../credit-card/credit-card.service';
 import { Injectable } from '@nestjs/common';
 import { Auth } from './auth.entity';
 import { UnauthorizedException } from '@nestjs/common';
