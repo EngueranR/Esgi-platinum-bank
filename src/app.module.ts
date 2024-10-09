@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { BankAccountModule } from './bank-account/bank-account.module';
+import { CreditCardModule } from './credit-card/credit-card.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { BankAccountModule } from './bank-account/bank-account.module';
     DatabaseModule,
     ConfigModule.forRoot(),
     BankAccountModule,
+    CreditCardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
