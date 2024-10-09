@@ -6,7 +6,6 @@ import {
   PrimaryKey,
   Table,
   Unique,
-  HasMany,
 } from 'sequelize-typescript';
 
 @Table
@@ -39,4 +38,7 @@ export class User extends Model {
 
   @Column(DataType.DATE)
   dateOfBirth: Date;
+
+  @Column(DataType.STRING)
+  address: string;
 }
