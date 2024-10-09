@@ -5,16 +5,22 @@ import { IUser } from './user.interface';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @Inject('PLAYER_REPOSITORY') private userRepository: typeof User,
-  ) {}
+  constructor(@Inject('USER_REPOSITORY') private userRepository: typeof User) {}
 
   async findAll(): Promise<User[]> {
-    return this.userRepository.findAll<User>();
+    return await this.userRepository.findAll<User>();
   }
 
   async findOne(id: number): Promise<User> {
-    return this.userRepository.findOne<User>({ where: { id } });
+    return await this.userRepository.findOne<User>({ where: { id } });
+  }
+
+  async findAccount(email: string, password: string): Promise<User> {
+    const user = await this.userRepository.findOne<User>({ where: { email } });
+    if (user && bcrypt.compareSync(password, user.password)) {
+      return user;
+    }
+    return null;
   }
 
   async create(user: IUser): Promise<User> {

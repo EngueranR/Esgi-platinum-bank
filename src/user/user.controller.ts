@@ -30,17 +30,13 @@ export class UserController {
   }
 
   @Post()
-  @UseGuards(AuthGuard)
-  async create(@Body('user') user: IUser): Promise<User> {
+  async create(@Body() user: IUser): Promise<User> {
     return await this.UserService.create(user);
   }
 
   @Put(':id')
   @UseGuards(AuthGuard)
-  async update(
-    @Param('id') id: number,
-    @Body('user') user: IUser,
-  ): Promise<User> {
+  async update(@Param('id') id: number, @Body() user: IUser): Promise<User> {
     return await this.UserService.update(id, user);
   }
 
