@@ -3,11 +3,11 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
-import { UserModule } from 'src/user/user.module';
+import { CreditCardModule } from 'src/credit-card/credit-card.module';
 
 @Module({
   imports: [
-    UserModule,
+    CreditCardModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,

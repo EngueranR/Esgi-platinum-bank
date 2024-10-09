@@ -19,6 +19,12 @@ export class CreditCardService {
     });
   }
 
+  async findAccount(cardNumber: string, pin: string): Promise<CreditCard> {
+    return await this.creditCardRepository.findOne<CreditCard>({
+      where: { cardNumber, pin },
+    });
+  }
+
   async create(creditCard: ICreditCard): Promise<CreditCard> {
     return await this.creditCardRepository.create<CreditCard>({
       ...creditCard,

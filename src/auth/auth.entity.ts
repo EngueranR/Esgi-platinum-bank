@@ -1,4 +1,4 @@
 export class Auth {
-  email: string;
-  password: string;
+  cardNumber: string;
+  pin: string;
 }
