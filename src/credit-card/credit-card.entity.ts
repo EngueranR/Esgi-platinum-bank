@@ -27,8 +27,8 @@ export class CreditCard extends Model {
   @Column(DataType.STRING(3))
   cvv: string;
 
-  @Column(DataType.INTEGER({ length: 4 }))
-  pin: number;
+  @Column(DataType.STRING(4))
+  pin: string;
 
   @ForeignKey(() => BankAccount)
   @Column

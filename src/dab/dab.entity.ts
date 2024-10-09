@@ -7,7 +7,7 @@ import {
   Table,
   ForeignKey,
 } from 'sequelize-typescript';
-// import { Bank } from './bank.entity';
+import { Bank } from 'src/bank/bank.entity';
 
 @Table
 export class DAB extends Model<DAB> {
@@ -22,7 +22,7 @@ export class DAB extends Model<DAB> {
   @Column(DataType.STRING)
   status: string;
 
-  // @ForeignKey(() => Bank)
-  // @Column
-  // bankId: number;
+  @ForeignKey(() => Bank)
+  @Column
+  bankId: number;
 }

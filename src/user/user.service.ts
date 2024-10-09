@@ -15,14 +15,6 @@ export class UserService {
     return await this.userRepository.findOne<User>({ where: { id } });
   }
 
-  async findAccount(email: string, password: string): Promise<User> {
-    const user = await this.userRepository.findOne<User>({ where: { email } });
-    if (user && bcrypt.compareSync(password, user.password)) {
-      return user;
-    }
-    return null;
-  }
-
   async create(user: IUser): Promise<User> {
     return await this.userRepository.create<User>({
       ...user,
