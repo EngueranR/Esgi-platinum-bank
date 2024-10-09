@@ -8,9 +8,9 @@ export const databaseProviders = [
         dialect: 'mysql',
         host: 'localhost',
         port: 3306,
-        username: 'username',
-        password: 'password',
-        database: 'database',
+        username: process.env.DATABASE_USERNAME,
+        password: process.env.DATABASE_PASSWORD,
+        database: process.env.DATABASE_NAME,
       });
       sequelize.addModels([]);
       await sequelize.sync({ force: true });
