@@ -8,6 +8,7 @@ import {
   Unique,
   ForeignKey,
 } from 'sequelize-typescript';
+import { BankAccount } from 'src/bank-account/bank-account.entity';
 
 @Table
 export class CreditCard extends Model {
@@ -17,16 +18,19 @@ export class CreditCard extends Model {
   id: number;
 
   @Unique
-  @Column(DataType.STRING)
+  @Column(DataType.STRING(16))
   cardNumber: string;
 
   @Column(DataType.DATE)
   expiryDate: Date;
 
-  @Column(DataType.STRING)
+  @Column(DataType.STRING(3))
   cvv: string;
 
-  // @ForeignKey(() => BankAccount)
-  // @Column
-  // bankAccountId: number;
+  @Column(DataType.INTEGER({ length: 4 }))
+  pin: number;
+
+  @ForeignKey(() => BankAccount)
+  @Column
+  bankAccountId: number;
 }
