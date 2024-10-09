@@ -17,6 +17,11 @@ export const databaseProviders = [
         database: process.env.DATABASE_NAME,
         models: [BankAccount, User, CreditCard, Bank],
       });
+
+      BankAccount.hasMany(User);
+      BankAccount.hasMany(CreditCard);
+      CreditCard.hasOne(User);
+
       await sequelize.sync({ force: true });
       return sequelize;
     },
