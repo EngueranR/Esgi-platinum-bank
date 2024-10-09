@@ -23,6 +23,12 @@ export class TransactionController {
     return await this.transactionService.findAll();
   }
 
+  @Get('last/:id')
+  @UseGuards(AuthGuard)
+  async getLast(@Param('id') accountId: number): Promise<Transaction[]> {
+    return await this.transactionService.findTwentyLast(accountId);
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard)
   async findOne(@Param('id') id: number): Promise<Transaction> {

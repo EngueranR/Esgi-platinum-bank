@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Transaction } from './transaction.entity';
 import { ITransaction } from './transaction.interface';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class TransactionService {
@@ -11,6 +12,20 @@ export class TransactionService {
 
   async findAll(): Promise<Transaction[]> {
     return await this.transactionRepository.findAll<Transaction>();
+  }
+
+  async findTwentyLast(accountId: number): Promise<Transaction[]> {
+    const transactions = await this.transactionRepository.findAndCountAll({
+      limit: 20,
+      where: {
+        [Op.or]: [
+          { sourceAccountId: accountId },
+          { destinationAccountId: accountId },
+        ],
+      },
+    });
+
+    return transactions.rows;
   }
 
   async findOne(id: number): Promise<Transaction> {
