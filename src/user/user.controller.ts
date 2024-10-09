@@ -47,6 +47,7 @@ export class UserController {
     return await this.UserService.remove(id);
   }
   @Get(':id/accounts')
+  @UseGuards(AuthGuard)
   async getAllAccounts(@Param('id') userId: number): Promise<BankAccount[]> {
     return await this.UserService.findAllAccountsbyUser(userId);
   }

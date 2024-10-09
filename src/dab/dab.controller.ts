@@ -30,7 +30,6 @@ export class DABController {
   }
 
   @Post()
-  @UseGuards(AuthGuard)
   async create(@Body() dab: IDAB): Promise<DAB> {
     return await this.dabService.create(dab);
   }
